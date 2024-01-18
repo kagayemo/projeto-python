@@ -1,16 +1,19 @@
 from re import match
 
 def verificar_strings(texto, padrao, texto_correto):
-    checar = match(padrao, texto)
+    try:
+        checar = match(padrao, texto)
 
-    if checar: 
-        return texto.strip()
+        if checar: 
+            return texto.strip()
 
-    print(f"\n\033[31;1mERRO! {texto_correto}\033[m\n")    
+        print(f"\n\033[31;1mERRO! {texto_correto}\033[m\n")    
 
-    texto = input("Digite novamente: ")
+        texto = input("Digite novamente: ")
 
-    return verificar_strings(texto, padrao, texto_correto)
+        return verificar_strings(texto, padrao, texto_correto)
+    except Exception:
+        print("\033[31;1mDigite um texto válido!\033[31;1m")
 
 def verificar_float(texto):
     valor = 0.0
@@ -52,12 +55,24 @@ def verificar_quantidade(valor1, valor2):
         try:
             if valor1 >= valor2:
                 return valor1
-            print("ERRO! Digite uma quantidade maior do que a quantidade mínima!\n")
+            print("\033[31;1mERRO! Digite uma quantidade maior do que a quantidade mínima!\033[m\n")
 
             valor1 = int(input("Digite a quantidade novamente: "))
-        except Exception:
-            print("ERRO! Digite um valor válido!!") 
 
+        except Exception:
+            print("\033[31;1mERRO! Digite um valor válido!!\033[m")
+
+def validar_categoria():
+    while True:
+        try:
+            id_categoria = int(input("Digite o id da categoria desejada: "))
+
+            if 3 >= id_categoria >= 1:
+                return id_categoria
+            print("\033[31;1mDigite uma opção válida!\033[m")
+
+        except Exception:
+            print("\033[31;1mERRO! Digite um valor válido.\033[m") 
 
 
         
